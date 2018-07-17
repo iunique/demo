@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=0.5, maximun-scale=1, minimum-scale=1, user-scaleable=no">
+     <title id="title1">WUSTACM校赛报名</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/layer.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script th:src="@{/js/login.js}"></script>
+     <script type = "text/javascript">
+             $(function(){
+   	           	 $("#select1").val("1");
+   		         $("#select1").trigger("change");
+   	           })
+             function ajax() {
+                 befcommit();
+                 $.ajax({
+                     type : "POST",
+                     url : "/sign/updateTeamInfo",
+                     data: $('#myform').serialize(),//序列化表单值
+                     success : function (result) {
+                         if(result.code==0)//data即为后台返回的数据
+                         {
+                             alert("信息填写不完整，提交失败");
+                         }
+                         else
+                         {
+                             alert("提交成功");
+                         }
+                         //window.location.href="跳转页面"
+                     }
+                 })
+             }
+             function change(){
+                         var select_school = document.getElementById("select2");
+
+                        if (document.getElementById("select1").value=="2")
+                         {
+                            select_school.disabled=false;
+                            select_school[1].style.display="none";
+                            select_school[0].selected=true;
+                         }
+                        else
+                        {
+                            select_school.disabled=true;
+                            select_school[1].style.display=true;
+                            select_school[1].selected=true;
+
+                        }
+             	     	
+             	
+                }
+             function befcommit(){$("[disabled]").each(function() {//移除disable,后台方可取值
+                 if (parseInt($(this).val()) != -1) {
+                     $(this).attr("disabled", false);
+                 }
+             });
+             }
+
+     </script>
+        <style >
+         .form-group{
+         	width: 350px;
+         	margin-left: 830px;
+         }
+         @media screen and (max-width: 900px){
+         	.form-group{
+         		width: 350px;
+         		margin-left: 10px;
+         	}
+         }
+     </style>
+</head>
+    <h2 class="form-group text-center" >WUSTACM校赛报名</h2>
+<div class="form-group ">
+    <label class="control-label text-right" >已经填过报名信息？<a href="javascript:;" id="bLogin" onclick="ShowLoginText()">点击修改</a></label>
+</div>
+<div id="loginBox">
+    <form id="box">
+    <div class="login-item"><input  type="text" id="InputUsername" placeholder="请输入队长名" name="leader_name"/></div>
+    <div class="login-item"><input  type="password" id="InputUserPwd" placeholder="请输入队长电话" name="tel"/></div>
+    <div class="login-item"><a href="javascript:;" onclick="Login()">登录</a></div>
+    </form>
+</div>
+    <form id="myform">
+    <div class="form-group col-lg-offset-3">
+	<label class="control-label">请选择报名类型:</label>
+    <select name="" class="form-control" id="select1" onchange="change();">
+    	<option value="1" selected>校内</option>
+    	<option value="2">校外</option>
+    </select>
+    </div>
+    <div class="form-group col-lg-offset-3" id="div_select2" >
+	<label  class="control-label">请选择学校:</label>
+    <select name="school" class="form-control" id="select2" >
+    	<option value="null">请选择</option>
+        <option value="武汉科技大学">武汉科技大学</option>
+    	<option value="武汉大学">武汉大学</option>
+    	<option value="华中科技大学">华中科技大学</option>
+    	<option value="武汉理工大学">武汉理工大学</option>
+    	<option vaule="华中师范大学">华中师范大学</option>
+    	<option value="中国地质大学（武汉）">中国地质大学（武汉）</option>
+    	<option value="湖北工业大学">湖北工业大学</option>
+    	<option value="湖北中医药大学">湖北中医药大学</option>
+    	<option value="武汉纺织大学">武汉纺织大学</option>
+    </select>
+    </div>
+	<div class="form-group has-error" >
+	<label class="control-label" >队名:</label>
+    <input name="team_name" id="team_name" type="text" class="form-control input-lg" placeholder="请输入队名" >
+    </div>
+     </div>
+	<div class="form-group has-error" >
+	<label class="control-label" >队长名:</label>
+    <input name="leader_name" id="leader_name" type="text" class="form-control input-lg" placeholder="请输入队长名字" >
+    </div>
+    <div class="form-group has-error" >
+	<label class="control-label" >队长电话:</label>
+    <input name="tel" id="tel" type="number" class="form-control input-lg" placeholder="请输入电话" >
+    </div>
+     </div>
+	<div class="form-group has-error" >
+	<label class="control-label" >队员1:</label>
+    <input name="fel1" id="fel1" type="text" class="form-control input-lg" placeholder="请输入队员1名字" >
+    </div>
+     </div>
+	<div class="form-group has-error" >
+	<label class="control-label" >队员2:</label>
+    <input name="fel2" id="fel2" type="text" class="form-control input-lg" placeholder="请输入队员2名字" >
+    </div>
+     </div>
+	
+   
+    <button type="button" id="btn_submit" class=" form-group btn btn-primary" onclick="ajax()">提交</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+    margin:0px;
+    padding:0px;
+    font:"微软雅黑";
+    font-size:16px;
+}
+#header{
+    width:100%;
+    height:40px;
+    background-color:#000;
+}
+#header-con{
+    width:900px;
+    height:40px;
+    margin:0 auto;
+    line-height:40px;
+}
+#header-con div{
+    float:right;
+    margin-left:10px;
+    line-height:40px;
+}
+#header-con div a{
+    text-decoration:none;
+    margin-top:0 auto;
+    color:#fff;
+    display:block;  
+}
+.login-item input{
+    width:350px;
+    height:40px;
+}
+.login-item a{
+    width:354px;
+    height:50px;
+    background:#00897B;
+    display:block;
+    font-size:16px;
+    color:#fff;
+    line-height:50px;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+}
+.login-item{
+    margin-top:15px;
+    margin-left:20px;
+}
+#loginBox{
+    display:none;
+}
